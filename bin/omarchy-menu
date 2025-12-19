@@ -65,6 +65,10 @@ install_terminal() {
   present_terminal "omarchy-install-terminal $1"
 }
 
+install_browser() {
+  present_terminal "omarchy-install-browser $1"
+}
+
 aur_install() {
   present_terminal "echo 'Installing $1 from AUR...'; yay -S --noconfirm $2"
 }
@@ -221,7 +225,7 @@ show_setup_security_menu() {
 }
 
 show_install_menu() {
-  case $(menu "Install" "󰣇  Package\n󰣇  AUR\n  Web App\n  TUI\n  Service\n  Style\n󰵮  Development\n  Editor\n  Terminal\n󱚤  AI\n󰍲  Windows\n  Gaming") in
+  case $(menu "Install" "󰣇  Package\n󰣇  AUR\n  Web App\n  TUI\n  Service\n  Style\n󰵮  Development\n  Editor\n  Terminal\n🌏︎ Browser\n󱚤  AI\n󰍲  Windows\n  Gaming") in
   *Package*) terminal omarchy-pkg-install ;;
   *AUR*) terminal omarchy-pkg-aur-install ;;
   *Web*) present_terminal omarchy-webapp-install ;;
@@ -231,6 +235,7 @@ show_install_menu() {
   *Development*) show_install_development_menu ;;
   *Editor*) show_install_editor_menu ;;
   *Terminal*) show_install_terminal_menu ;;
+  *Browser*) show_install_browser_menu ;;
   *AI*) show_install_ai_menu ;;
   *Windows*) present_terminal "omarchy-windows-vm install" ;;
   *Gaming*) show_install_gaming_menu ;;
@@ -265,6 +270,15 @@ show_install_terminal_menu() {
   *Alacritty*) install_terminal "alacritty" ;;
   *Ghostty*) install_terminal "ghostty" ;;
   *Kitty*) install_terminal "kitty" ;;
+  *) show_install_menu ;;
+  esac
+}
+
+show_install_browser_menu() {
+  case $(menu "Install" "🌏︎ Vivaldi\n🌏︎ Firefox\n🌏︎ Chrome") in
+  *Vivaldi*) install_browser "vivaldi" ;;
+  *Firefox*) install_browser "firefox" ;;
+  *Chrome*) install_browser "chrome" ;;
   *) show_install_menu ;;
   esac
 }
